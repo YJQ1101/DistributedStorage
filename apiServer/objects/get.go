@@ -14,5 +14,6 @@ func get(context *gin.Context) {
 		log.Println(err)
 		return
 	}
+	hh
 	context.String(http.StatusOK, string(stream))
 }
