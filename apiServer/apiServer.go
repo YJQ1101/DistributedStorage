@@ -2,7 +2,6 @@ package main
 
 import (
 	"DistributedStorage/apiServer/heartbeat"
-	"DistributedStorage/apiServer/locate"
 	"DistributedStorage/apiServer/objects"
 	"github.com/gin-gonic/gin"
 )
@@ -12,6 +11,6 @@ func main() {
 
 	go heartbeat.ListenHeartbeat()
 	objects.Handler(r)
-	locate.Handler(r)
+	//locate.Handler(r)
 	r.Run(":8000")
 }

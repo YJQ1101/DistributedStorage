@@ -3,6 +3,7 @@ package rabbitmq
 import (
 	"encoding/json"
 	"github.com/streadway/amqp"
+	"log"
 )
 
 type RabbitMQ struct {
@@ -13,8 +14,9 @@ type RabbitMQ struct {
 }
 
 func New(s string) *RabbitMQ {
-	conn, err := amqp.Dial(s)
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
+		log.Println(err)
 		panic(err)
 	}
 	ch, err := conn.Channel()
