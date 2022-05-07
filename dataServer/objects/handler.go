@@ -5,6 +5,6 @@ import (
 )
 
 func Handler(engine *gin.Engine) {
-	engine.GET("/objects/test", get)
-	engine.PUT("/objects/test", put)
+	engine.GET("/objects/:value", get)
+	engine.PUT("/objects/:value", put)
 }

@@ -9,7 +9,7 @@ import (
 
 func Locate(name string) string {
 	q := rabbitmq.New(os.Getenv("RABBITMQ_SERVER"))
-	q.Publish("dataServers", name)
+	q.Publish("dataServer", name)
 	c := q.Consume()
 	go func() {
 		time.Sleep(time.Second)

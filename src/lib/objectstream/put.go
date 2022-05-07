@@ -16,6 +16,7 @@ func NewPutStream(server, object string) *PutStream {
 	c := make(chan error)
 	go func() {
 		request, _ := http.NewRequest("PUT", "http://"+server+"/objects/"+object, reader)
+		println("http://" + server + "/objects/" + object)
 		client := http.Client{}
 		r, err := client.Do(request)
 		if err == nil && r.StatusCode != http.StatusOK {

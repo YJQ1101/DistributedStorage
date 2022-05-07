@@ -1,10 +1,11 @@
 package main
 
 import (
-	"DistributedStorage/apiServer/objects"
 	"DistributedStorage/dataServer/heartbeat"
 	"DistributedStorage/dataServer/locate"
+	"DistributedStorage/dataServer/objects"
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 func main() {
@@ -12,5 +13,5 @@ func main() {
 	go heartbeat.StartHeartbeat()
 	go locate.StartLocate()
 	objects.Handler(r)
-	r.Run("")
+	r.Run(os.Getenv("LISTEN_ADDRESS"))
 }

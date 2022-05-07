@@ -21,8 +21,7 @@ func get(context *gin.Context) {
 	}
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(stream)
-
-	context.DataFromReader(200, int64(buf.Len()), "application/json", stream, nil)
+	context.String(http.StatusOK, buf.String())
 }
 
 func getStream(object string) (io.Reader, error) {

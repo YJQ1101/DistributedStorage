@@ -14,7 +14,7 @@ type RabbitMQ struct {
 }
 
 func New(s string) *RabbitMQ {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://test:test@localhost:5672/")
 	if err != nil {
 		log.Println(err)
 		panic(err)

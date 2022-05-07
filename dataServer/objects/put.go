@@ -8,7 +8,10 @@ import (
 )
 
 func put(context *gin.Context) {
-	file, err := os.Create("./objects.txt")
+	filename := context.Param("value")
+
+	file, err := os.Create(os.Getenv("STORAGE_ROOT") + "/objects/" + filename)
+	println(os.Getenv("STORAGE_ROOT") + "/objects/" + filename)
 	if err != nil {
 		log.Println(err)
 		return

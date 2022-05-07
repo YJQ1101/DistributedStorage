@@ -5,12 +5,11 @@ import (
 	"testing"
 )
 
-const host = "amqp://guest:guest@localhost:5672/"
+const host = "amqp://test:test@localhost:5672/"
 
 func TestRabbitMQ_Publish(t *testing.T) {
 	q := New(host)
 	defer q.Close()
-	println("hehe")
 	q.Bind("test")
 
 	q2 := New(host)
@@ -58,7 +57,6 @@ func TestRabbitMQ_Publish(t *testing.T) {
 	}
 }
 
-/*
 func TestRabbitMQ_Send(t *testing.T) {
 	q := New(host)
 	defer q.Close()
@@ -92,4 +90,3 @@ func TestRabbitMQ_Send(t *testing.T) {
 		t.Errorf("expected %s, actual %s", expect2, actual)
 	}
 }
-*/
