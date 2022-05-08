@@ -2,6 +2,7 @@ package objects
 
 import (
 	"DistributedStorage/apiServer/locate"
+	"DistributedStorage/src/lib/es"
 	"DistributedStorage/src/lib/objectstream"
 	"bytes"
 	"fmt"
@@ -9,11 +10,36 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
+	"strconv"
 )
 
 func get(context *gin.Context) {
-	fileName := context.Param("value")
-	stream, err := getStream(fileName)
+	name := context.Param("value")
+	versionId := context.Query("version")
+
+	version := 0
+	var err error
+	if len(versionId) != 0 {
+		version, err = strconv.Atoi(versionId)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+	}
+	meta, err := es.GetMetadata(name, version)
+	if err != nil {
+		log.Println(err)
+		context.String(http.StatusInternalServerError, "500")
+		return
+	}
+	if meta.Hash == "" {
+		context.String(http.StatusNotFound, "404")
+		return
+	}
+	object := url.PathEscape(meta.Hash)
+
+	stream, err := getStream(object)
 	if err != nil {
 		context.String(http.StatusNotFound, "404")
 		log.Println(err)
