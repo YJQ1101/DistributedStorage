@@ -6,5 +6,4 @@ import (
 
 func Handler(engine *gin.Engine) {
 	engine.GET("/objects/:value", get)
-	engine.PUT("/objects/:value", put)
 }
